@@ -3,30 +3,48 @@ package com.Bridglabz;
 import java.util.Scanner;
 
 public class EmployeeWage {
-    int sal,id,total_sal;
-    String name;
-    public void sal(int sal){
+    public static void calculateTotalWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
 
-        total_sal=sal*12;
-
-    }
-    public void display(){
-        System.out.println("name of the employee is " +name);
-        System.out.println("total sal of the employee is " +total_sal);
-        System.out.println("id of the employee is "+id);
+        final int IS_PART_TIME=1;
+        final int IS_FULL_TIME=2;
+        int TotalempWage = 0;
+        int TotalWorkingDays=0;
+        int TotalempHrs=0;
+        int empHrs;
+        System.out.println("Details of " + companyName + " employee");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Wage per hour:" + wagePerHr);
+        System.out.println("Maximum working days:" + maxWorkingDays);
+        System.out.println("Maximum working hours:" + maxWorkingHrs);
+        //Computation
+        while(TotalempHrs < maxWorkingHrs && TotalWorkingDays < maxWorkingDays) {
+            TotalWorkingDays++;
+            int empCheck =(int) (Math.floor(Math.random()*10)%3);
+            switch(empCheck)
+            {
+                case IS_PART_TIME:
+                    empHrs=8;
+                    break;
+                case IS_FULL_TIME:
+                    empHrs=4;
+                    break;
+                default:
+                    empHrs=0;
+                    break;
+            }
+            TotalempHrs=TotalempHrs+empHrs;
+        }
+        System.out.println("Total Employee Hrs: "+TotalempHrs);
+        TotalempWage=TotalempHrs*wagePerHr;
+        System.out.println("Total employee Wage: "+TotalempWage);
+        System.out.println();
 
     }
     public static void main(String[] args) {
-        EmployeeWage e= new EmployeeWage();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter name of the emp:");
-        e.name=sc.next();
-        System.out.println("Enter salary of the emp:");
-        e.sal=sc.nextInt();
-        System.out.println("Enter Id of the employee:");
-        e.id=sc.nextInt();
-        e.sal(e.sal);
-        e.display();
+        calculateTotalWage("Amazon", 40, 15, 200);
+        calculateTotalWage("BigBazar", 20, 20, 100);
+        calculateTotalWage("Infosys", 30, 15, 200);
+        calculateTotalWage("Tata", 20, 20, 100);
     }
 
 }
